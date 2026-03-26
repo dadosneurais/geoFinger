@@ -1,0 +1,156 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" class="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="icon" href="/static/money.png" />
+            <link href="/static/bootstrap.min.css" rel="stylesheet" />
+            <link href="/static/all.min.css" rel="stylesheet" />
+            <link href="/static/stylesheet.css" rel="stylesheet" />
+            <link href="/static/virtual-keyboard.css" rel="stylesheet" />
+            <link href="/static/login.css" rel="stylesheet" />
+            <link href="/static/login-extend.css" rel="stylesheet" />
+    <link href="" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #272727;
+            --secondary-color: #272727;
+            --background-img: url('/static/homelogin.png');
+        }
+        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {  
+
+            .text-primary {
+                color: #272727 !important;
+            }
+            .text-secondary {
+                color: #272727 !important;
+            }
+            .btn-primary {
+                border-color: #272727 !important;
+                background-color: #272727 !important;
+            }
+            body {
+                background-image: url('/static/homelogin.png');
+                background-color: #272727;
+            }
+            section.complement {
+                background-color: #272727;
+            }
+        }
+
+        .mobile-tablet-only {
+            display: none;
+        }
+
+        .desktop-only {
+            display: block;
+        }
+
+        
+        @media (max-width: 1023px) {
+            .desktop-only {
+                display: block;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body id="bdigital">
+    <div class="login">
+
+        <main class="desktop-only container-fluid p-0">
+            
+            <div class="backgroundImage" style="min-height: 875px;">
+
+            <section class="content">
+                <figure class="brand">
+                    <img src="/static/logo.png"
+                        style="max-width: 200px; max-height: 100%;" />
+                </figure>
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-subtitle form-title">        Entrar
+
+
+</h5>
+                                <h6 class="card-subtitle">
+
+</h6>
+                                <p class="text-warning font-weight-bold mt-3">
+
+</p>
+                            </div>
+                            <div class="card-body">
+        <form onsubmit="login.disabled = true; return true;" action="" method="post">
+            <div class="form-container">
+                <div class="form">
+                    <div class="form-group">
+                        <label for="control-label text-uppercase">
+                            <span class="text-uppercase">CPF ou E-mail</span>
+                        </label>
+                        <input id="username" class="form-control" name="username" value="" type="text" autofocus autocomplete="off" />
+                    </div>
+                    <div class="form-group">
+                        <label for="control-label text-uppercase">SENHA</label>
+                        <input id="password" class="form-control" name="password" type="password" autocomplete="off" />
+                    </div>
+                </div>
+                <div id="virtual-keyboard-container"></div>
+            </div>
+            <div class="actions">
+                <div class="form-group">
+                        <a href=""
+                            class="text-secondary2">Esqueci minha senha</a>
+                </div>
+                <button type="button" id="loginForm" class="btn btn-primary" onclick="alert('Para acessar você precisa permitir a localização.'); location.reload();">Acessar</button>
+            </div>
+        </form>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="complement">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="adbox text-center">
+                            <div class="adtext mt-5 ml-auto mr-auto hidden-in-mobile">
+                                <p class="download-message mt-5">Baixe nosso app</p>
+                                <p class="slogan">Realize movimentações financeiras de forma fácil, ágil e segura!</p>
+                                <div>
+                                    <a href=""><img src="/static/ios.png" width="56" class="mr-2" /></a>
+                                    <a href=""><img src="/static/android.png" width="56" /></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            </div>
+        </main>
+
+        <footer>
+            <div class="dark-row d-flex justify-content-end align-items-center">
+                <p class="m-0 mr-5">Todos os direitos reservados.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+
+</body>
+</html>
