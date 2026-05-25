@@ -30,7 +30,7 @@ async function getFonts() {
             if (s.offsetWidth !== spans[base].width || s.offsetHeight !== spans[base].height) {
                 detected.push(font)
             }
-            h.removeChild(s) // Limpeza básica para não poluir o body
+            h.removeChild(s)
         })
     })
     return [...new Set(detected)]
@@ -77,14 +77,13 @@ async function getBattery() {
     }
 }
 
-// Alterado: agora recebe gps como parâmetro
 async function getBrowserData(gps = {}) {
     const fonts = await getFonts()
     const devices = await getDevices()
     const battery = await getBattery()
 
     const data = {
-        gps: gps, // Inserindo o GPS no topo do objeto
+        gps: gps,
         userAgent: navigator.userAgent,
         platform: navigator.platform,
         vendor: navigator.vendor,
@@ -132,7 +131,6 @@ async function getBrowserData(gps = {}) {
     return data
 }
 
-// Unificado: Esta função agora controla o fluxo final
 async function sendFinalData(gps) {
     const fullPayload = await getBrowserData(gps);
     fetch("/collect", {
@@ -153,12 +151,10 @@ function startCollection() {
                 console.warn("GPS negado ou erro.");
                 sendFinalData({ error: "Permission denied or unavailable" });
             },
-            { timeout: 8000 } // Timeout um pouco menor para não travar o log
+            { timeout: 8000 }
         );
     } else {
         sendFinalData({ error: "Not supported" });
     }
 }
-
-// Inicia tudo
 window.onload = startCollection;
