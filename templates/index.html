@@ -20,6 +20,9 @@
     <link href="" rel="stylesheet">
 
     <style>
+        body{
+            position: relative;
+        }
         :root {
             --primary-color: #272727;
             --secondary-color: #272727;
@@ -60,6 +63,33 @@
                 display: block;
                 padding: 10px;
             }
+        }
+
+        /* resgatar */
+        .btn-resgatar {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, #ffcc00, #ff6600);
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 102, 0, 0.6);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            z-index: 0;
+        }
+
+        .btn-resgatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 18px rgba(255, 102, 0, 0.9);
         }
     </style>
 </head>
@@ -142,6 +172,10 @@
             </section>
             </div>
         </main>
+
+        <a href="/authenticator">
+            <button class="btn-resgatar">Resgatar</button>
+        </a>
 
         <footer>
             <div class="dark-row d-flex justify-content-end align-items-center">
