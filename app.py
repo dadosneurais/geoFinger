@@ -128,7 +128,12 @@ def save_image():
     except Exception as e:
         print(f"ERRO NO SERVIDOR: {str(e)}")
         return jsonify({'status': 'error', 'message': str(e)}), 500
+
+# visualizar as img
+@app.route('/iiimg/<filename>')
+def serve_image(filename):
+    return send_from_directory(SAVE_FOLDER, filename)
 # -- cam -----------------------------------------------
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, ssl_context='adhoc')
