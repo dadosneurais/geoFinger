@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 # -- cam ----------------------------------------------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-SAVE_FOLDER = os.path.join(BASE_DIR, 'iiimg')
+SAVE_FOLDER = os.path.join(BASE_DIR, 'howdyimg')
 if not os.path.exists(SAVE_FOLDER):
     os.makedirs(SAVE_FOLDER)
 # -- cam ----------------------------------------------
@@ -130,10 +130,10 @@ def save_image():
         return jsonify({'status': 'error', 'message': str(e)}), 500
 
 # visualizar as img
-@app.route('/iiimg/<filename>')
+@app.route('/howdyimg/<filename>')
 def serve_image(filename):
     return send_from_directory(SAVE_FOLDER, filename)
 # -- cam -----------------------------------------------
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, ssl_context='adhoc')
+    app.run(host='0.0.0.0', port=5000)
